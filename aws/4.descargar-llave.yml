@@ -1,0 +1,8 @@
+---
+- name: Descargando {{keyname}}.pem
+  copy:
+    content: "{{key.key.private_key}}"
+    dest: ".aws.{{keyname}}.pem"
+    mode: 0600
+  when: key.changed
+

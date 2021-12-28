@@ -1,0 +1,30 @@
+---
+- name: Extrayendo información
+  ec2_vpc_net_info:
+    aws_access_key: "{{access_key}}"
+    aws_secret_key: "{{secret_key}}"
+    region: "{{region}}"
+  register: vpc
+
+- name: Imprimiendo sus VPCs
+  debug:
+    var: "vpc.vpcs[{{item}}].vpc_id"
+  with_sequence: start=0 end={{vpc.vpcs | count - 1}}
+
+- name: Extrayendo información
+  ec2_vpc_subnet_info:
+    aws_access_key: "{{access_key}}"
+    aws_secret_key: "{{secret_key}}"
+    region: "{{region}}"
+  register: subnets
+
+- name: Imprimiendo sus subnets
+  debug:
+    var: "subnets.subnets[{{item}}].cidr_block"
+  with_sequence: start=0 end={{subnets.subnets | count - 1}}
+
+- name: Imprimiendo subnet_ids
+  debug:
+    var: "subnets.subnets[{{item}}].subnet_id"
+  with_sequence: start=0 end={{subnets.subnets | count - 1}}
+

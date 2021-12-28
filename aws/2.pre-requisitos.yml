@@ -1,0 +1,8 @@
+---
+- name: Instalando boto3 & botocore
+  pip:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - boto3
+    - botocore

@@ -1,0 +1,25 @@
+#ansible-playbook 1.main.yml
+---
+- name: Amazon Elastic Compute Cloud
+  hosts: localhost
+  gather_facts: false
+  vars:
+    access_key: ""
+    secret_key: ""
+    keyname: ""
+    ec2name: ""
+    ami: ""
+    region: ""
+  tasks:
+    - name: Importando pre-requisitos
+      include_tasks: 2.pre-requisitos.yml
+
+    - name: Importando crear-llave
+      include_tasks: 3.crear-llave.yml
+
+    - name: Importando descargar-llave
+      include_tasks: 4.descargar-llave.yml
+
+    - name: Importando crear-ec2
+      include_tasks: 5.crear-ec2.yml
+

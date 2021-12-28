@@ -1,0 +1,25 @@
+---
+- name: Creando un Ec2 con caracteristicas por defecto
+  ec2_instance:
+    name: "{{ec2name}}"
+    key_name: "{{keyname}}"
+    instance_type: t2.micro
+    image_id: "{{ami}}"
+    wait: yes
+    vpc_subnet_id: subnet-08f05c5899f024d02
+    region: us-east-2
+    network:
+      assign_public_ip: yes
+    tags:
+      automatizado por:  ansible
+    security_group: sg-04cf9c3d68e5d6e56
+    aws_access_key: "{{access_key}}"
+    aws_secret_key: "{{secret_key}}"
+  register: ec2
+  delegate_to: localhost
+- debug:
+       msg:
+       - Mi IP publica es {{ec2.instances[0].network_interfaces[0].association.public_ip}}
+       - Mi DNS publico es {{ec2.instances[0].network_interfaces[0].association.public_dns_name}}
+
+

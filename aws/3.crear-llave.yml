@@ -1,0 +1,12 @@
+---
+- name: Creando {{keyname}}.pem
+  ec2_key:
+    aws_access_key: "{{ access_key }}"
+    aws_secret_key: "{{ secret_key }}"
+    region: us-east-2
+    name: "{{ keyname }}"
+  register: key
+
+- name: Resultado
+  debug:
+    msg: "{{key.msg}}"
